@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>EASM 🤿</title>
+
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>EASM - A deep 🤿 </h1>
+					<h2>Part 1: First steps</h2>
+					<h4>https://camp-easm-first.github.io</h4>
+					<h4>DOWNLOAD: vm.dontfindmeplz.com</h4>
+				</section>
+				<section>
+					<h1>WHOAMI</h1>
+					<h3>SIX2DEZ</h3>
+					<img src="profile_pic.jpg" style="border-radius:50%;width:20%;"/>
+					<ul>
+						<li style="font-size: 0.7em;">Dad, ethical hacker and bash lover at <img style="vertical-align: middle;width: 4em;margin: 0px;" data-src="visma_logo.png">  Red Team</li>
+						<li style="font-size: 0.7em;">Main FOSS projects: <a href="https://github.com/six2dez/reconftw">reconFTW</a>, <a href="https://github.com/six2dez/OneListForAll">OneListForAll</a>, <a href="https://pentestbook.six2dez.com/">pentest-book</a></li>
+						<li style="font-size: 0.7em;">Into climbing, hiking and anything related to mountains</li>
+						<li style="font-size: 0.7em;"><a href="https://twitter.com/six2dez1">@six2dez1</a> on Twiter, <a href="https://github.com/six2dez">@six2dez</a> almost everywhere else</li>
+					</ul>
+					</br>
+					<div style="font-size: 0.5em;">
+						DOWNLOAD: vm.dontfindmeplz.com
+					</div>
+				</section>
+				<section>
+					<h1>WHOAMI</h1>
+					<h3>joohoi</h3>
+          			<img src="joohoi_profile.jpg" style="border-radius:50%;width: 20%;" /><br />
+					<ul>
+						<li>Handwaver at <img style="vertical-align: middle;width: 4em;margin: 0px;" data-src="visma_logo.png"> red team</li>
+						<li>Open source stuff: <strong>acme-dns</strong>, <strong>ffuf</strong>, <strong>certbot</strong></li>
+						<li>Dad, board game geek, brewer</li>
+						<li><a href="https://twitter.com/joohoi">@joohoi</a> everywhere on the inter{webs,tubes,pipes}</li>
+					</ul>
+					</br>
+					<div style="font-size: 0.5em;">
+						DOWNLOAD: vm.dontfindmeplz.com
+					</div>
+        		</section>
+				<section>
+					<h2>This workshop</h2>
+					<ul>
+						<li>Methodology and techniques for getting started with recon</li>
+						<li>Toolset and services to work with</li>
+						<li>Profile your target before you start attacking a target</li>
+					</ul>
+					</br></br>
+					<div style="font-size: 0.5em;">
+						DOWNLOAD: vm.dontfindmeplz.com
+					</div>
+				</section>
+				<section>
+					<h2>Our target</h2>
+					<h4>PWNABLE INC.</h4>
+					<h4>dontfindmeplz.com</h4>
+					</br></br>
+					<div style="font-size: 0.5em;">
+						DOWNLOAD: vm.dontfindmeplz.com
+					</div>
+				</section>
+				<section>
+					<h2>Acquiring target</h2>
+					<section>
+						<p style="font-size: 0.7em;">(a.k.a. horizontal correlation)</p>
+						<img src="https://media.giphy.com/media/3zDdFSPALuCe6C43nM/giphy.gif" width="60%" height="auto"/>
+					</section>
+					<section>
+						<h4>
+							Basic Info Gathering 1/2
+						</h4>
+						<ul>
+							<li style="font-size: 0.7em;">First look to corporate website
+								<ul>
+									<li style="font-size: 0.8em;">About us</li>
+									<li style="font-size: 0.8em;">Contact email</li>
+								</ul>
+							</li>
+							<li style="font-size: 0.7em;"><a href="https://www.exploit-db.com/google-hacking-database">Google</a>/<a href="https://github.com/techgaun/github-dorks/blob/master/github-dorks.txt">Github</a> Dorks</li>
+							<li style="font-size: 0.7em;">Emails, usernames, techs
+								<ul>
+									<li style="font-size: 0.8em;">Metadata on indexed docs</li>
+									<li style="font-size: 0.8em;">Social media accounts</li>
+								</ul>
+							</li>
+							<li style="font-size: 0.7em;">Data breaches</li>
+						</ul>
+						<aside class="notes">
+							metafinder<br>
+							emailfinder<br>
+							https://breachdirectory.org/ + https://hashes.com/en/decrypt/hash
+						</aside>
+					</section>
+					<section>
+						<h4>
+							Basic Info Gathering 2/2
+						</h4>
+						<pre data-id="code-animation"><code>
+			# Metadata finder, 10 results limit 
+			# on Google, Bing and Baidu
+			metafinder -d "target.tld" -l 10 -go -bi -ba -o path
+			
+			# Email finder
+			emailfinder -d "target.tld"
+
+			# Data breaches for free
+			https://breachdirectory.org/
+			https://hashes.com/en/decrypt/hash
+					</code></pre>
+					</section>
+					<section>
+						<br>
+						<br>
+						<h4>
+							<a href="https://www.crunchbase.com/">Crunchbase</a>
+						</h4>
+						<ul>
+							<li style="font-size: 0.7em;">Merges & Acquisitions</li>
+							<li style="font-size: 0.7em;">Associated domains</li>
+							<li style="font-size: 0.7em;">Historic info</li>
+							<li style="font-size: 0.7em;">Others: tech stack, supply chain</li>
+						</ul>
+						<p>
+							<img src="https://media.giphy.com/media/l1LcbR6oWTJkJllOE/giphy.gif" width="60%" height="auto"/>
+						</p>
+					</section>
+					<section>
+						<br>
+						<h4>
+							ASN recon
+						</h4>
+						<ul>
+							<li style="font-size: 0.7em;">Detect dedicated ASN</li>
+							<li style="font-size: 0.7em;">Expand IP blocks</li>
+							<li style="font-size: 0.7em;">Hosting provider</li>
+							<li style="font-size: 0.7em;">Mapping target's network</li>
+						</ul>
+						<pre data-id="code-animation"><code>
+	# Manual
+	bgp.he.net, ipinfo.io, asnlookup.com
+	
+	# Fetch info from ASN with different input types
+	asnmap -i 1.3.3.7 -org GOOGLE -d facebook.com -a AS3941
+
+	# Amass enum by keyword or ASN
+	amass intel -org "COMPANY" -asn AS3941 -whois
+						</code></pre>
+					</section>
+					<section>
+						<h4>
+							Registrants / reverse whois
+						</h4>
+						<p>Owner name, company, email or keyword, recursive relationship because companies use different emails, have different companies name on registry</p>
+						<p>Difficult to automate or fetching blindly from cli. High probability of going out of scope.</p>
+						<ul>
+							<li style="font-size: 0.7em;"><a href="https://viewdns.info/">Viewdns</a></li>
+							<li style="font-size: 0.7em;"><a href="https://www.whoxy.com/">Whoxy</a></li>
+							<li style="font-size: 0.7em;"><a href="https://iqwhois.com/">iqwhois</a></li>
+							<li style="font-size: 0.7em;"><a href="https://www.whoisxmlapi.com/">WhoisXMLAPI</a></li>
+						</ul>
+					</section>
+					<section>
+						<h4>
+							Favicon Hash
+						</h4>
+						<p>Useful for related domains discovery, requires favicon hash calculation and Shodan membership, watch out for redesigns or old logos 😜</p>
+						<pre data-id="code-animation"><code>
+				# Shodan query
+				http.favicon.hash:FAVICONHASH
+
+				# Tool
+				python3 favUp.py -wl web_list.txt -sc
+						</code></pre>
+					</section>
+					<section>
+						<h4>
+							Recursion
+						</h4>
+						<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3d3a2Eza3Z3NTJhbzZxbDVjbHhpN3NwdmxzNWhsZ3IzYWJuZHRodSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xThuWu82QD3pj4wvEQ/giphy.gif" width="25%" height="auto"/>
+					</section>
+				</section>
+				<section>
+					<h2>Asset discovery</h2>
+					<section>
+						<p>
+							<img src="https://media.giphy.com/media/YlAuPqtjwlSyzy8PZU/giphy-downsized-large.gif" width="auto" height="auto"/>
+						</p>
+					</section>
+					<section>
+						<h4>
+							Passive subdomain enumeration 1/4
+						</h4>
+						<p>Easy and fast way to recover subdomains but outdated, token expense model on most cases</p>
+						<ul>
+							<li style="font-size: 0.7em;">Third party datasets
+								<ul>
+									<li style="font-size: 0.8em;">Sources (<a href="https://securitytrails.com/">SecurityTrails</a>, <a href="https://censys.io/">Censys</a>, ... <a href="https://docs.google.com/spreadsheets/d/1ssuiovzgvFH2aTK-ymrxy2VezvHw5fnvXxBMH3Jnok4/edit?usp=sharing">+200</a>)</li>
+									<li style="font-size: 0.8em;">Tools (<a href="https://github.com/OWASP/Amass">Amass</a>, <a href="https://github.com/projectdiscovery/subfinder">Subfinder</a>, <a href="https://github.com/tomnomnom/assetfinder">assetfinder</a>)</li>
+								</ul>
+							</li>
+							<li style="font-size: 0.7em;"><a href="https://crt.sh/">Certificate transparency</a></li>
+							<li style="font-size: 0.7em;">Code on version control providers</li>
+						</ul>
+					</section>
+					<section>
+						<h4>
+							Passive subdomain enumeration 2/4
+						</h4>
+						<pre data-id="code-animation"><code>
+					# Amass passive data fetch
+					amass enum -passive -d target.tld	
+					subfinder -d target.tld
+					
+					# Subdomain search on crtsh with crt tool
+					crt -s -json target.tld
+					
+					# Subdomains from GitHub, requires GH tokens 
+					github-subdomains -d target.tld -t tokens.txt
+
+					# Subdomains from GitLab
+					gitlab-subdomains -d target.tld
+						</code></pre>
+					</section>
+					<section>
+						<h4>
+							Passive subdomain enumeration 3/4
+						</h4>
+						<ul>
+							<li style="font-size: 0.7em;">DNS Records</li>
+							<li style="font-size: 0.7em;"><a href="https://builtwith.com/">Analytics</a> <a href="https://osint.sh/analytics/">cross</a> <a href="https://site-overview.com/">referencing</a>
+								<ul>
+									<li style="font-size: 0.8em;">Google Analytics</li>
+									<li style="font-size: 0.8em;">Google Tag Manager</li>
+									<li style="font-size: 0.8em;">Facebook Pixel Tag</li>
+									<li style="font-size: 0.8em;">NewRelic</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h4>
+							Passive subdomain enumeration 4/4
+						</h4>
+						<pre data-id="code-animation"><code>
+				# Fetching DNS records with dnsx
+				cat subs.txt | dnsx -cname -ns -mx -soa -resp					
+				
+				# Analytics from BuiltWith and HackerTarget
+				cat file.txt | analyticsrelationships 					
+				
+				# Analytics from SpyOnWeb, site-overview.com
+				# 	osint.sh and HackerTarget
+				udon -silent -json -s UA-33427076 | jq -c
+						</code></pre>
+					</section>
+					<section>
+						<h4>Active subdomain enumeration 1/3</h4>
+						<p>High cost of time and resources but unique results</p>
+						<p>Requirements</p>
+							<ul>
+								<li style="font-size: 0.7em;"><a href="https://github.com/trickest/resolvers/blob/main/resolvers.txt">Resolvers?</a></li>
+								<li style="font-size: 0.7em;"><a href="https://github.com/six2dez/resolvers_reconftw/blob/main/resolvers_trusted.txt">Trusted resolvers???</a></li>
+								<li style="font-size: 0.7em;">Bulk DNS resolution (a.k.a. <a href="https://github.com/blechschmidt/massdns">massdns</a>)</li>
+								<li style="font-size: 0.7em;">Wordlists, generic or targeted</li>
+							</ul>
+					</section>
+					<section>
+						<br>
+						<br>
+						<h4>Active subdomain enumeration 2/3</h4>
+							<ul>
+								<li style="font-size: 0.7em;">Generic <a href="https://gist.github.com/six2dez/0e07fd3461338374cc3ef942e1e9ddaf">wordlists</a> bruteforcing</li>
+								<li style="font-size: 0.7em;"><a href="https://gist.github.com/six2dez/942b01af47204958045e7c392c250c86">Permutations</a>
+									<ul>
+										<li style="font-size: 0.8em;">Wordlist generation</li>
+										<li style="font-size: 0.8em;">Regex analysis</li>
+										<li style="font-size: 0.8em;">AI???</li>
+									</ul>
+								</li>
+							</ul>
+							<pre data-id="code-animation"><code>
+		# Gotator wordlist generation with fixed depth
+		# iterate numbers 5 times, clean dupes and advanced mode
+		gotator -sub subdomains.txt -perm permutations.txt \
+		-depth 1 -numbers 5 -mindup -adv -md > permutations.txt
+
+		# Regulator
+		python3 main.py target.tld subdomains.txt output.rules
+		./make_brute_list.sh output.rules output.brute
+							</code></pre>
+					</section>
+					<section>
+						<br>
+						<h4>
+							Active subdomain enumeration 3/3
+						</h4>
+						<pre data-id="code-animation"><code>
+	# Custom resolvers generation
+	dnsvalidator -tL https://public-dns.info/nameservers.txt \
+	-thread 200 > resolvers.txt
+	
+	# DNS resolution
+	puredns bruteforce wordlist.txt target.com \
+	-r resolvers.txt --resolvers-trusted res_trusted.txt \
+	-l 1000 --wildcard-tests 10 -w output.txt
+
+	# Amass active resolution
+	amass enum -df doms.txt -w subs.txt -aw perms.txt \
+	-rf resolvers.txt -trf res_trust.txt -trqps 400
+						</code></pre>
+						<p style="font-size: 0.7em;">⚠️ You could end DOSing the target</p>
+					</section>
+					<section>
+						<h4>
+							Other techniques
+						</h4>
+						<ul>
+							<li style="font-size: 0.7em;">x509 certificate parsing</li>
+							<li style="font-size: 0.7em;">DNS <a href="https://www.securesystems.de/blog/enhancing-subdomain-enumeration-ents-and-noerror/">NOERROR</a> (nested subdomains)</li>
+						</ul>
+						<pre data-id="code-animation"><code>
+			# x509 subdomain extraction
+			cat subs.txt | tlsx -san -cn -silent -r											
+			
+			# DNS NOERROR detection filtering by response code
+			# Forcing NXDOMAINS, otherwise it's fake response
+			# Then look for noerrors only
+			echo "r4nd0m.target.tld" | dnsx -rcode noerror,nxdomain
+			dnsx -d target.tld -rcode noerror -w wordlist.txt
+							</code></pre>
+					</section>
+					<section>
+						<br>
+						<br>
+						<h4>
+							Recursion
+						</h4>
+						<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3d3a2Eza3Z3NTJhbzZxbDVjbHhpN3NwdmxzNWhsZ3IzYWJuZHRodSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xThuWu82QD3pj4wvEQ/giphy.gif" width="auto" height="auto"/>
+					</section>
+				</section>
+				<section>
+					<h2>Port scanning & service discovery</h2>
+					<section>
+						<br>
+						<br>
+						<br>
+						<p>
+							<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTQyZjZkZzg2NHFtNGJsNG9ucDk2dTZ0bDc3ODQxZjdpbWZzNHp0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/64agTijLAGgifRbF9r/giphy.gif" width="auto" height="auto"/>
+						</p>
+					</section>
+					<section>
+						<br>
+						<br>
+						<h4>
+							Fetch hosts
+						</h4>
+						<p>It's essential to resolve IPs to avoid unnecessary DNS resolutions when scanning ports and scanning the same host more than once</p>
+						<ul>
+							<li style="font-size: 0.7em;">DNS resolution of previous step</li>
+							<li style="font-size: 0.7em;">Get IPs from CIDRs or ASN</li>
+						</ul>
+						<pre data-id="code-animation"><code>
+				# Get A/AAAA records from subdomains
+				dnsx -a -aaaa -resp -silent -l subdomains.txt
+				
+				# Expand CIDRs/ASN
+				echo "ASN_OR_CIDR" | mapcidr -silent
+						</code></pre>
+					</section>
+					<section>
+						<br>
+						<h4>
+							Cloud detection
+						</h4>
+						<p style="font-size: 0.7em;"><a href="https://cdn.nuclei.sh/">Cloud IP ranges, WAFs, CDNs</a></p>
+						<p>The goal is skip useless port scans and avoid BAN or blocks</p>
+						<pre data-id="code-animation"><code>
+								# WAF and CDN detection
+								cat list.txt | ipcdn -v
+
+								# Cloud detection by bruteforce
+								python3 cloud_enum.py -k keyword
+						</code></pre>
+					</section>
+					<section>
+						<h4>
+							Passive & active port scanning
+						</h4>
+						<ul>
+							<li style="font-size: 0.7em;">Passive: Shodan cli/smap
+								<ul>
+									<li style="font-size: 0.8em;">Fast</li>
+									<li style="font-size: 0.8em;">No target interaction</li>
+									<li style="font-size: 0.8em;">Outdated</li>
+								</ul>
+							</li>
+							<li style="font-size: 0.7em;">Active: Masscan/nmap
+								<ul>
+									<li style="font-size: 0.8em;">Depending on the run, but slower</li>
+									<li style="font-size: 0.8em;">Noisier as long as you actually scan the target</li>
+									<li style="font-size: 0.8em;">Up-to-date real data</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<br>
+						<h4>
+							Port scanning examples
+						</h4>
+						<pre data-id="code-animation"><code>
+						# Passive ports scan
+						smap -iL targets.txt
+						shodan host 10.X
+
+						# Active ports scan
+						masscan 10.X.X.X -p1-1000
+						nmap -iL targets.txt
+						nmap -iL targets.txt -sV --script vulners 
+							--script-args mincvss=5.0
+						</code></pre>
+
+					</section>
+					<section>
+						<br>
+						<h4>
+							Expand previous steps
+						</h4>
+						<p style="font-size: 0.7em;">Reverse DNS records / PTR</p>
+						<p style="font-size: 0.7em;">⚠️ Really easy to go out of scope (cloud providers, shared hosting, etc)</p>
+						<pre data-id="code-animation"><code>
+				# PTR records
+				cat iplist.txt | dnsx -ptr -retry 3 -silent -resp
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>Questions?</h2>
+				</section>
+				<section>
+					<h2>Thanks!</h2>
+				</section>
+			</div>
+		</div>
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>

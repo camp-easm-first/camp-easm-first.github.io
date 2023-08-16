@@ -1,0 +1,24 @@
+camp-ws1 94.237.30.8:
+    - Nginx 
+        - Corpo website
+        - WP with nuclei CVE LFI CVE-2022-0679
+    - FTP (default creds)
+
+camp-ws2 94.237.102.9:
+    - Nagios (default creds)
+    - generated link list for wordlist generation
+
+camp-ws3 94.237.94.8:
+    - SSRF
+
+dontfindmeplz.com
+- imnotlegacy #ftp
+- militarygrade #wp cve
+dontpwnmeplz.com
+- kissa #ssrf
+- linkedandimportant #links list
+- nag #nagios
+okyoufoundme.com
+- linkedandimportant #links list
+- notonfire
+- thisisfine
